@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ConnectHub • Modern Social Media</title>
+  <meta name="description" content="ConnectHub is a modern mini social media platform inspired by Instagram. Share memories, discover creators, like and connect.">
+  <link rel="icon" href="/uploads/default-avatar.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <div class="app-layout">
+    <!-- Desktop / Tablet Navigation Sidebar -->
+    <aside class="sidebar">
+      <div class="brand-container">
+        <a href="#feed" class="brand-link" onclick="App.navigateTo('feed')">
+          <div class="brand-logo-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+            </svg>
+          </div>
+          <span class="brand-title">ConnectHub</span>
+        </a>
+      </div>
+
+      <nav class="nav-menu">
+        <div class="nav-item active" data-view="feed" onclick="App.navigateTo('feed')">
+          <div class="nav-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <span class="nav-label">Home</span>
+        </div>
+
+        <div class="nav-item" onclick="App.openSearchModal()">
+          <div class="nav-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          </div>
+          <span class="nav-label">Search</span>
+        </div>
+
+        <div class="nav-item" data-view="explore" onclick="App.navigateTo('explore')">
+          <div class="nav-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <span class="nav-label">Explore</span>
+        </div>
+
+        <div class="nav-item" onclick="App.openCreatePostModal()">
+          <div class="nav-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><line x1="12" x2="12" y1="8" y2="16"/><line x1="8" x2="8" y1="12" y2="12"/></svg>
+          </div>
+          <span class="nav-label">Create</span>
+        </div>
+
+        <div class="nav-item" id="nav-profile-item" data-view="profile" onclick="App.navigateTo('profile')">
+          <div class="nav-icon">
+            <img class="nav-avatar" id="nav-user-avatar" src="/uploads/default-avatar.svg" alt="User avatar">
+          </div>
+          <span class="nav-label">Profile</span>
+        </div>
+      </nav>
+
+      <div class="nav-footer">
+        <div class="nav-item" id="nav-auth-item">
+          <div class="nav-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/></svg>
+          </div>
+          <span class="nav-label">Log In</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Container -->
+    <main class="main-wrapper">
+      <div id="main-content" style="width: 100%;">
+        <!-- Rendered dynamically by App -->
+      </div>
+    </main>
+
+    <!-- Mobile Bottom Navigation Bar -->
+    <nav class="bottom-nav">
+      <button class="bottom-nav-item" onclick="App.navigateTo('feed')" title="Home">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </button>
+      <button class="bottom-nav-item" onclick="App.openSearchModal()" title="Search">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      </button>
+      <button class="bottom-nav-item" onclick="App.openCreatePostModal()" title="Create">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><line x1="12" x2="12" y1="8" y2="16"/><line x1="8" x2="8" y1="12" y2="12"/></svg>
+      </button>
+      <button class="bottom-nav-item" onclick="App.navigateTo('explore')" title="Explore">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </button>
+      <button class="bottom-nav-item" onclick="App.navigateTo('profile')" title="Profile">
+        <img class="bottom-nav-avatar" id="bottom-nav-avatar" src="/uploads/default-avatar.svg" alt="Profile">
+      </button>
+    </nav>
+  </div>
+
+  <!-- CREATE POST MODAL -->
+  <div class="modal-backdrop" id="create-post-modal">
+    <div class="modal-window">
+      <div class="modal-header">
+        <span style="width: 28px;"></span>
+        <h3 class="modal-title">Create new post</h3>
+        <button class="modal-close-btn" onclick="App.closeAllModals()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="create-post-form" onsubmit="App.handleCreatePostSubmit(event)">
+          <!-- File drop zone -->
+          <div class="file-drop-zone" id="create-drop-zone" onclick="document.getElementById('post-image-file').click()">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#8e8e8e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+            </svg>
+            <div style="font-weight: 600; font-size: 15px;">Drag photos here or click to browse</div>
+            <div style="font-size: 12px; color: var(--text-muted)">Supports JPG, PNG, WEBP, GIF up to 10MB</div>
+            <input type="file" id="post-image-file" accept="image/*" style="display: none;" onchange="App.handleImageFileSelected(this.files[0])">
+          </div>
+
+          <!-- Preview Area -->
+          <div id="create-preview-area"></div>
+
+          <!-- Optional Image URL fallback -->
+          <div class="form-group" style="margin-top: 14px;">
+            <label class="form-label">Or paste image URL</label>
+            <input type="url" id="post-image-url" class="form-control" placeholder="https://example.com/photo.jpg">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Caption</label>
+            <textarea id="post-caption" class="form-control" placeholder="Write a caption..." rows="3"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Location (optional)</label>
+            <input type="text" id="post-location" class="form-control" placeholder="Add location (e.g. Tokyo, Japan)">
+          </div>
+
+          <button type="submit" class="profile-action-btn btn-primary" style="width: 100%; padding: 12px;">Share Post</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDIT PROFILE MODAL -->
+  <div class="modal-backdrop" id="edit-profile-modal">
+    <div class="modal-window">
+      <div class="modal-header">
+        <span style="width: 28px;"></span>
+        <h3 class="modal-title">Edit profile</h3>
+        <button class="modal-close-btn" onclick="App.closeAllModals()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="edit-profile-form" onsubmit="App.handleEditProfileSubmit(event)">
+          <!-- Avatar Preview & Change -->
+          <div style="display: flex; align-items: center; gap: 18px; margin-bottom: 20px; padding: 12px; background: #fafafa; border-radius: var(--radius-md);">
+            <img id="edit-avatar-preview" src="/uploads/default-avatar.svg" style="width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border-color);">
+            <div style="display:flex; flex-direction:column; gap:4px;">
+              <span style="font-weight: 600; font-size: 14px;">Profile Photo</span>
+              <button type="button" class="profile-action-btn btn-secondary" style="font-size: 12px; padding: 5px 12px;" onclick="document.getElementById('edit-avatar-file').click()">
+                Change photo
+              </button>
+              <input type="file" id="edit-avatar-file" accept="image/*" style="display: none;" onchange="App.handleAvatarFileSelected(this.files[0])">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input type="text" id="edit-fullname" class="form-control" required maxlength="60">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Bio</label>
+            <textarea id="edit-bio" class="form-control" rows="3" placeholder="Tell the world about yourself" maxlength="250"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Website</label>
+            <input type="text" id="edit-website" class="form-control" placeholder="https://yourwebsite.com">
+          </div>
+
+          <button type="submit" class="profile-action-btn btn-primary" style="width: 100%; padding: 12px;">Save Changes</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- POST DETAIL LIGHTBOX MODAL -->
+  <div class="modal-backdrop" id="post-detail-modal-backdrop">
+    <div id="post-detail-content"></div>
+  </div>
+
+  <!-- USER LIST MODAL (Likes, Followers, Following) -->
+  <div class="modal-backdrop" id="user-list-modal">
+    <div class="modal-window">
+      <div class="modal-header">
+        <span style="width: 28px;"></span>
+        <h3 class="modal-title" id="user-list-title">Users</h3>
+        <button class="modal-close-btn" onclick="App.closeAllModals()">&times;</button>
+      </div>
+      <div class="modal-body user-list-modal-body" id="user-list-body">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- SEARCH MODAL -->
+  <div class="modal-backdrop" id="search-modal">
+    <div class="modal-window">
+      <div class="modal-header">
+        <span style="width: 28px;"></span>
+        <h3 class="modal-title">Search Users</h3>
+        <button class="modal-close-btn" onclick="App.closeAllModals()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group" style="margin-bottom: 12px;">
+          <input type="text" id="search-input" class="form-control" placeholder="Search by username or name..." oninput="App.handleSearchInput(this.value)">
+        </div>
+        <div class="user-list-modal-body" id="search-results">
+          <div style="text-align: center; padding: 20px; color: var(--text-muted)">Type a username or name to search</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Application Scripts -->
+  <script src="/js/api.js"></script>
+  <script src="/js/state.js"></script>
+  <script src="/js/components.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>
